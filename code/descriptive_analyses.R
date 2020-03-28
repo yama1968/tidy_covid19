@@ -10,7 +10,7 @@ library(ggrepel)
 
 # --- Some visuals showing the spread of Covid-19 ------------------------------
 
-merged <- read_csv("data/merged.csv", 
+merged <- read_csv("../data/merged.csv", 
                 col_types = cols()) %>%
   mutate(date = ymd(date))
 
@@ -83,13 +83,13 @@ lab_x_axis_deaths <-
 gg_my_blob <- list(
   scale_y_continuous(trans='log10', labels = scales::comma),  
   theme_minimal(), 
-  theme(
-    plot.title.position = "plot", 
-    plot.caption.position =  "plot",
-    plot.caption = element_text(hjust = 0),
-    axis.title.x = element_text(hjust = 1),
-    axis.title.y = element_text(hjust = 1),
-  ),
+  # theme(
+  #   plot.title.position = "plot", 
+  #   plot.caption.position =  "plot",
+  #   plot.caption = element_text(hjust = 0),
+  #   axis.title.x = element_text(hjust = 1),
+  #   axis.title.y = element_text(hjust = 1),
+  # ),
   labs(caption = lab_notes),
   gghighlight(TRUE,  label_key = country, use_direct_label = TRUE,
               label_params = list(segment.color = NA, nudge_x = 1))
@@ -133,7 +133,7 @@ ggplot(df_deaths %>%
     y = "Recovered cases (logarithmic scale)"
   )
 
-ggsave("media/recoveries.png", width = 8, height = 4, dpi = 160)
+ggsave("../media/recoveries.png", width = 8, height = 4, dpi = 160)
 
 single_out_countries <- function(df, countries, var, relative = FALSE) {
   palette <-  function(n) {
@@ -178,7 +178,7 @@ single_out_countries(
 
 # --- Some descriptives for the implentation of NPIs over time -----------------
 
-read_csv("data/acaps_npi.csv", col_types = cols()) %>%
+read_csv("../data/acaps_npi.csv", col_types = cols()) %>%
   mutate(npi_date = ymd(date_implemented)) %>%
   rename(npi_type = category) %>%
   mutate(
@@ -313,8 +313,8 @@ compare_death_growth <- function(df, var) {
     theme_minimal() + 
     theme(
       legend.position = c(0.75, 0.75),
-      plot.title.position = "plot", 
-      plot.caption.position =  "plot",
+      # plot.title.position = "plot", 
+      # plot.caption.position =  "plot",
       plot.caption = element_text(hjust = 0),
       axis.title.x = element_text(hjust = 1),
       axis.title.y = element_text(hjust = 1),
@@ -390,13 +390,13 @@ ggplot(ctry_level %>% filter(!is.na(gtrends_country_score)),
     size = "Number of implemented\nsocial distancing measures"
   ) + 
   theme(
-    plot.title.position = "plot", 
-    plot.caption.position =  "plot",
+    # plot.title.position = "plot", 
+    # plot.caption.position =  "plot",
     plot.caption = element_text(hjust = 0),
     axis.title.x = element_text(hjust = 1),
     axis.title.y = element_text(hjust = 1),
   ) +
   scale_x_continuous(trans='log10', labels = scales::comma)  
 
-ggsave("media/pattention.png", width = 1.91*4, height = 4, dpi = 160)
+ggsave("../media/pattention.png", width = 1.91*4, height = 4, dpi = 160)
 

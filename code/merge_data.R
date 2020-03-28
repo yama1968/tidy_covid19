@@ -1,11 +1,11 @@
 library(tidyverse)
 library(lubridate)
 
-cases <- read_csv("data/jh_covid19_ctry_level.csv", 
+cases <- read_csv("../data/jh_covid19_ctry_level.csv", 
                   col_types = cols()) %>%
   mutate(date = ymd(date))
 
-read_csv("data/acaps_npi.csv", col_types = cols()) %>%
+read_csv("../data/acaps_npi.csv", col_types = cols()) %>%
   mutate(npi_date = ymd(date_implemented)) %>%
   rename (npi_type = category) %>%
   select(iso3c, npi_date, npi_type) -> npi
@@ -56,18 +56,18 @@ cases %>%
     by = c("iso3c", "date")
   ) %>%
   left_join(
-    read_csv("data/gtrends_country_day.csv", col_types = cols()) %>%
+    read_csv("../data/gtrends_country_day.csv", col_types = cols()) %>%
       mutate(date = ymd(date)),
     by = c("iso3c", "date")
   ) %>%
   left_join(
-    read_csv("data/gtrends_country.csv", col_types = cols()) %>%
+    read_csv("../data/gtrends_country.csv", col_types = cols()) %>%
       rename(gtrends_country_score = gtrends_score),
     by = c("iso3c")
   ) %>%
   left_join(
-    read_csv("data/wbank.csv", col_types = cols()),
+    read_csv("../data/wbank.csv", col_types = cols()),
     by = "iso3c"
   )  -> raw_sample
 
-write_csv(raw_sample, "data/merged.csv")
+write_csv(raw_sample, "../data/merged.csv")

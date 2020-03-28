@@ -86,8 +86,8 @@ gtrends_country_day <- extract_tibble_from_list(gt_parsed_list, 1)
 gtrends_region <- extract_tibble_from_list(gt_parsed_list, 2)
 gtrends_city <- extract_tibble_from_list(gt_parsed_list, 3)
 
-write_csv(gtrends_global %>% select(-iso2c), "data/gtrends_country.csv") 
-write_csv(gtrends_country_day, "data/gtrends_country_day.csv") 
-write_csv(gtrends_region, "data/gtrends_region.csv") 
-write_csv(gtrends_city, "data/gtrends_city.csv") 
+write_csv(gtrends_global %>% select(-iso2c), "../data/gtrends_country.csv") 
+write_csv(gtrends_country_day, "../data/gtrends_country_day.csv") 
+write_csv(gtrends_region, "../data/gtrends_region.csv") 
+write_csv(gtrends_city, "../data/gtrends_city.csv") 
 
